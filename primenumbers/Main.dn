@@ -1,0 +1,21 @@
+uses core.Core
+
+component provides App requires
+    core.Core core, time.Timer timer
+{
+
+    int App:main(AppParam param[])
+        {
+
+		int n = 0
+        while(true)
+            {
+            timer.sleep(2000)
+
+            core.call(n)
+			n += 1
+            }
+
+        return 1
+	}
+}

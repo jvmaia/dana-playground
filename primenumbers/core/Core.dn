@@ -1,0 +1,9 @@
+uses arithmetic.Arith
+
+component provides core.Core requires io.Output out, arithmetic.Arith arith, data.IntUtil intutil {
+    void Core:call(int n) {
+        out.println("calling arith with $(intutil.makeString(n))...")
+        int result = arith.isPrime(n)
+        out.println(intutil.makeString(result))
+    }
+}

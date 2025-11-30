@@ -1,0 +1,44 @@
+uses core.Core
+
+component provides App requires
+	Loader loader, io.Output out,
+	time.Timer timer, composition.Adapt adapt
+{
+
+    int App:main(AppParam param[])
+        {
+        //load the components that we'll be using
+        IDC myComponent = loader.load("core/Core.o")
+
+        IDC variantA = loader.load("arithmetic/Arith.o")
+        IDC variantB = loader.load("arithmetic/Arith1.o")
+
+		IDC timer = loader.load("time/Timer.o")
+
+        //bind our required interface to its initial configuration
+        myComponent.wire("arithmetic.Arith", variantA, "arithmetic.Arith")
+		variantA.wire("time.Timer", timer, "time.Timer")
+
+        Core myObject = new Core() from myComponent
+
+        //test out adaptation...
+        bool alpha = true
+		int n = 0
+        while(true)
+            {
+            timer.sleep(1000)
+
+            if (alpha)
+                adapt.adaptRequiredInterface(myComponent, "arithmetic.Arith", variantA)
+                else
+                adapt.adaptRequiredInterface(myComponent, "arithmetic.Arith", variantB)
+
+            alpha = !alpha
+
+            myObject.call(n)
+			n += 1
+            }
+
+        return 1
+	}
+}

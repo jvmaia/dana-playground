@@ -1,0 +1,11 @@
+component provides arithmetic.Arith requires io.Output out {
+    int arithmetic.Arith:isPrime(int number) {
+        out.println("using Arith0 implementation")
+        // if (number > 100) {
+        //     timer.sleep(10000)
+        // } else {
+        //     timer.sleep(30000)
+        // }
+        return 0
+    }
+}

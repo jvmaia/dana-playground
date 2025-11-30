@@ -1,0 +1,3 @@
+interface Arith {
+    int isPrime(int number)
+}
